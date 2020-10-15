@@ -20,8 +20,11 @@ var render = function() {
 };
 
 var animaCubo = function() {
-	if (this.cube.position.x >= 35 || this.cube.position.x <= -35) {
-		volocidadeCubo = velocidadeCubo * -1;
+	if (this.cube.position.x > 20 || this.cube.position.x < -20) {
+		velocidadeCuboX = -velocidadeCuboX;
+	}
+	if (this.cube.position.y > 20 || this.cube.position.y < -20) {
+		velocidadeCuboY = -velocidadeCuboY;
 	}
 	this.cube.position.x += velocidadeCuboX;
 	this.cube.position.y += velocidadeCuboY;
