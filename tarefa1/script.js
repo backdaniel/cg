@@ -2,47 +2,57 @@ var scene;
 var camera;
 var renderer;
 var sphere;
-var velocidadeEsferaX = 1;
-var velocidadeEsferaY = 1;
+var sphereVelocity = {
+	x: 1,
+	y: 1
+};
 
-var criaEsfera = function() {
+function spawnSphere() {
 	var geometry = new THREE.SphereGeometry(10, 10, 10);
 	var material = new THREE.MeshBasicMaterial({color: "blue"});
 
 	sphere = new THREE.Mesh(geometry, material);
 	scene.add(sphere);
-};
+}
 
-var render = function() {
+function render() {
 	requestAnimationFrame(render);
-	animaEsfera();
+	animateSphere();
 	renderer.render(scene, camera);
-};
+}
 
-var animaEsfera = function() {
-	if (this.sphere.position.x > 20 || this.sphere.position.x < -20) {
-		velocidadeEsferaX = -velocidadeEsferaX;
+function animateSphere() {
+	if (this.sphere.position.x > 30 || this.sphere.position.x < -30) {
+		sphereVelocity.x = -sphereVelocity.x;
 	}
 	if (this.sphere.position.y > 20 || this.sphere.position.y < -20) {
-		velocidadeEsferaY = -velocidadeEsferaY;
+		sphereVelocity.y = -sphereVelocity.y;
 	}
-	this.sphere.position.x += velocidadeEsferaX;
-	this.sphere.position.y += velocidadeEsferaY;
-};
+	this.sphere.position.x += sphereVelocity.x;
+	this.sphere.position.y += sphereVelocity.y;
+}
 
-var init = function() {
+function onWindowResize() {
+	camera.aspect = window.innerWidth / window.innerHeight;
+	camera.updateProjectionMatrix();
+	renderer.setSize(window.innerWidth, window.innerHeight);
+}
+
+function init() {
 	scene = new THREE.Scene();
-	camera = new THREE.PerspectiveCamera(40, window.innerWidth/window.innerHeight, 1, 1000);
-
+	camera = new THREE.PerspectiveCamera(
+		40,
+		window.innerWidth / window.innerHeight,
+		1,
+		1000
+	);
 	renderer = new THREE.WebGLRenderer();
 	renderer.setSize(window.innerWidth, window.innerHeight);
 	document.body.appendChild(renderer.domElement);
-
 	camera.position.z = 100;
-
-	criaEsfera();
-
+	spawnSphere();
 	render();
-};
+	window.addEventListener('resize', onWindowResize, false);
+}
 
 window.onload = this.init;
