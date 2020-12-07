@@ -9,3 +9,5 @@
 [tarefa4](tarefa4) - movimentacao da camera pelo espaco visualizando diferentes objetos
 
 [tarefa5](tarefa5) - uma fazenda com GUI pra olhar pros animais
+
+[tarefa6](tarefa6) - uma fazenda so que agora com texturas

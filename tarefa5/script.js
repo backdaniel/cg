@@ -43,7 +43,7 @@ var guiFunction = function(){
 
 var criaGround = function (){
 	textureLoader = new THREE.TextureLoader();
-	groundTexture = textureLoader.load('assets/grass.jpg');
+	groundTexture = textureLoader.load('../assets/grass.jpg');
 	groundTexture.wrapS = groundTexture.wrapT = THREE.RepeatWrapping;
 	groundTexture.repeat.set(20, 20);
 	groundTexture.anisotropy = 16;
@@ -59,7 +59,7 @@ var criaGround = function (){
 
 var loadObj = function(){
 	objLoader = new THREE.OBJLoader();
-	objLoader.load('assets/Cow.obj', function(object) {
+	objLoader.load('../assets/Cow.obj', function(object) {
 		vaca = object;
 		object.traverse(function (child) {
 			if (child instanceof THREE.Mesh) {
@@ -74,7 +74,7 @@ var loadObj = function(){
 	}, function(andamento) {
 		console.log((andamento.loaded / andamento.total *100) + "% pronto!");
 	}, function (error) { console.log(error); });
-	objLoader.load('assets/Cow.obj', function(object) {
+	objLoader.load('../assets/Cow.obj', function(object) {
 		vaca2 = object;
 		object.traverse(function (child) {
 			if (child instanceof THREE.Mesh) {
@@ -89,7 +89,7 @@ var loadObj = function(){
 	}, function(andamento) {
 		console.log((andamento.loaded / andamento.total *100) + "% pronto!");
 	}, function (error) { console.log(error); });
-	objLoader.load('assets/Cow.obj', function(object) {
+	objLoader.load('../assets/Cow.obj', function(object) {
 		vaca3 = object;
 		object.traverse(function (child) {
 			if (child instanceof THREE.Mesh) {
@@ -104,7 +104,7 @@ var loadObj = function(){
 	}, function(andamento) {
 		console.log((andamento.loaded / andamento.total *100) + "% pronto!");
 	}, function (error) { console.log(error); });
-	objLoader.load('assets/Pterodactyl.obj', function(object) {
+	objLoader.load('../assets/Pterodactyl.obj', function(object) {
 		ptero1 = object;
 		object.traverse(function (child) {
 			if (child instanceof THREE.Mesh) {
@@ -119,7 +119,7 @@ var loadObj = function(){
 	}, function(andamento) {
 		console.log((andamento.loaded / andamento.total *100) + "% pronto!");
 	}, function (error) { console.log(error); });
-	objLoader.load('assets/Pterodactyl.obj', function(object) {
+	objLoader.load('../assets/Pterodactyl.obj', function(object) {
 		ptero2 = object;
 		object.traverse(function (child) {
 			if (child instanceof THREE.Mesh) {
