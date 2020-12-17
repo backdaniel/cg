@@ -43,7 +43,7 @@ var guiFunction = function(){
 
 var criaGround = function (){
 	textureLoader = new THREE.TextureLoader();
-	groundTexture = textureLoader.load('../assets/grass-dirt.png');
+	groundTexture = textureLoader.load('../assets/mud.png');
 	groundTexture.wrapS = groundTexture.wrapT = THREE.RepeatWrapping;
 	groundTexture.repeat.set(20, 20);
 	groundTexture.anisotropy = 16;
