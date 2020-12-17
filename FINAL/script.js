@@ -23,25 +23,18 @@ var guiFunction = function(){
 	var chAnimal = gui.add(param, 'animal', ['vaca1', 'vaca2', 'vaca3', 'vaca4', 'vaca5', 'eagle1', 'sheep1']).name("Animal");
 	chAnimal.onChange(function(parametroQualquer){
 		if (parametroQualquer == 'vaca1'){
-			console.log(vaca1.position);
 			camera.lookAt(vaca1.position);
 		} else if (parametroQualquer == 'vaca2'){
-			console.log(vaca2.position);
 			camera.lookAt(vaca2.position);
 		} else if (parametroQualquer == 'vaca3'){
-			console.log(vaca3.position);
 			camera.lookAt(vaca3.position);
 		} else if (parametroQualquer == 'vaca4'){
-			console.log(vaca4.position);
 			camera.lookAt(vaca4.position);
 		} else if (parametroQualquer == 'vaca5'){
-			console.log(vaca5.position);
 			camera.lookAt(vaca5.position);
 		} else if (parametroQualquer == 'eagle1'){
-			console.log(eagle1.position);
 			camera.lookAt(eagle1.position);
 		} else if (parametroQualquer == 'sheep1'){
-			console.log(sheep1.position);
 			camera.lookAt(sheep1.position);
 		}
 	});
@@ -50,7 +43,7 @@ var guiFunction = function(){
 
 var criaGround = function (){
 	textureLoader = new THREE.TextureLoader();
-	groundTexture = textureLoader.load('../assets/grass.jpg');
+	groundTexture = textureLoader.load('../assets/grass-dirt.png');
 	groundTexture.wrapS = groundTexture.wrapT = THREE.RepeatWrapping;
 	groundTexture.repeat.set(20, 20);
 	groundTexture.anisotropy = 16;
