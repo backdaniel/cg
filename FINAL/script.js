@@ -5,45 +5,12 @@ var ground;
 var objLoader;
 var textureLoader;
 var spotLight;
-
-var vaca1 = [];
-var vaca2 = [];
-var vaca3 = [];
-var vaca4 = [];
-var vaca5 = [];
-var eagle1 = [];
-var sheep1 = [];
-
-var guiFunction = function(){
-	const gui = new dat.GUI();
-	var parametroQualquer;
-	param = {
-		animal: ""
-	};    
-	var chAnimal = gui.add(param, 'animal', ['vaca1', 'vaca2', 'vaca3', 'vaca4', 'vaca5', 'eagle1', 'sheep1']).name("Animal");
-	chAnimal.onChange(function(parametroQualquer){
-		if (parametroQualquer == 'vaca1'){
-			camera.lookAt(vaca1.position);
-		} else if (parametroQualquer == 'vaca2'){
-			camera.lookAt(vaca2.position);
-		} else if (parametroQualquer == 'vaca3'){
-			camera.lookAt(vaca3.position);
-		} else if (parametroQualquer == 'vaca4'){
-			camera.lookAt(vaca4.position);
-		} else if (parametroQualquer == 'vaca5'){
-			camera.lookAt(vaca5.position);
-		} else if (parametroQualquer == 'eagle1'){
-			camera.lookAt(eagle1.position);
-		} else if (parametroQualquer == 'sheep1'){
-			camera.lookAt(sheep1.position);
-		}
-	});
-	gui.open();
-};
+var bounce = 0;
+var bounceMult = 1;
 
 var criaGround = function (){
 	textureLoader = new THREE.TextureLoader();
-	groundTexture = textureLoader.load('../assets/mud.png');
+	groundTexture = textureLoader.load('../assets/mars.jpg');
 	groundTexture.wrapS = groundTexture.wrapT = THREE.RepeatWrapping;
 	groundTexture.repeat.set(20, 20);
 	groundTexture.anisotropy = 16;
@@ -53,153 +20,27 @@ var criaGround = function (){
 		new THREE.MeshBasicMaterial({map : groundTexture})
 	);
 	ground.rotation.x -= Math.PI / 2;
-	ground.position.y=-2;
 	scene.add(ground);
 };
 
-var loadObj = function(){
+var loadObj = function() {
 	objLoader = new THREE.OBJLoader();
 	fbxLoader = new THREE.FBXLoader();
 	textureLoader = new THREE.TextureLoader();
-	fbxLoader.load('../assets/Cow.fbx', function(object) {
-		vaca1 = object;
-		object.traverse(function(child) {
-			if (child instanceof THREE.Mesh) {
-				child.material.map = textureLoader.load("../assets/UVCow.png");
-				child.material.shininess = 0;
-			}
-		});
-		object.scale.x = 0.01;
-		object.scale.y = 0.01;
-		object.scale.z = 0.01;
-		object.position.z = 20;
-		object.position.x = 20;
-		object.position.y = -1;
-		object.castShadow = true;
-		scene.add(object);    
-	}, function(andamento) {
-		console.log((andamento.loaded / andamento.total *100) + "% pronto!");
-	}, function (error) { console.log(error); });
-	fbxLoader.load('../assets/Cow.fbx', function(object) {
-		vaca2 = object;
-		object.traverse(function(child) {
-			if (child instanceof THREE.Mesh) {
-				child.material.map = textureLoader.load("../assets/UVCow.png");
-				child.material.shininess = 0;
-			}
-		});
-		object.scale.x = 0.01;
-		object.scale.y = 0.01;
-		object.scale.z = 0.01;
-		object.position.z = 20;
-		object.position.x = 10;
-		object.position.y = -1;
-		object.castShadow = true;
-		scene.add(object);    
-	}, function(andamento) {
-		console.log((andamento.loaded / andamento.total *100) + "% pronto!");
-	}, function (error) { console.log(error); });
-	fbxLoader.load('../assets/Cow.fbx', function(object) {
-		vaca3 = object;
-		object.traverse(function(child) {
-			if (child instanceof THREE.Mesh) {
-				child.material.map = textureLoader.load("../assets/UVCow.png");
-				child.material.shininess = 0;
-			}
-		});
-		object.scale.x = 0.01;
-		object.scale.y = 0.01;
-		object.scale.z = 0.01;
-		object.position.z = -20;
-		object.position.x = -20;
-		object.position.y = -1;
-		object.castShadow = true;
-		scene.add(object);    
-	}, function(andamento) {
-		console.log((andamento.loaded / andamento.total *100) + "% pronto!");
-	}, function (error) { console.log(error); });
-	fbxLoader.load('../assets/Cow.fbx', function(object) {
-		vaca4 = object;
-		object.traverse(function(child) {
-			if (child instanceof THREE.Mesh) {
-				child.material.map = textureLoader.load("../assets/UVCow.png");
-				child.material.shininess = 0;
-			}
-		});
-		object.scale.x = 0.01;
-		object.scale.y = 0.01;
-		object.scale.z = 0.01;
-		object.position.z = -20;
-		object.position.x = -10;
-		object.position.y = -1;
-		object.castShadow = true;
-		scene.add(object);    
-	}, function(andamento) {
-		console.log((andamento.loaded / andamento.total *100) + "% pronto!");
-	}, function (error) { console.log(error); });
-	fbxLoader.load('../assets/Cow.fbx', function(object) {
-		vaca5 = object;
-		object.traverse(function(child) {
-			if (child instanceof THREE.Mesh) {
-				child.material.map = textureLoader.load("../assets/UVCow.png");
-				child.material.shininess = 0;
-			}
-		});
-		object.scale.x = 0.01;
-		object.scale.y = 0.01;
-		object.scale.z = 0.01;
-		object.position.z = 20;
-		object.position.x = -10;
-		object.position.y = -1;
-		object.castShadow = true;
-		scene.add(object);    
-	}, function(andamento) {
-		console.log((andamento.loaded / andamento.total *100) + "% pronto!");
-	}, function (error) { console.log(error); });
-	fbxLoader.load('../assets/Eagle.fbx', function(object) {
-		eagle1 = object;
-		object.traverse(function(child) {
-			if (child instanceof THREE.Mesh) {
-				child.material.map = textureLoader.load("../assets/UVEagle.png");
-				child.material.shininess = 0;
-			}
-		});
-		object.position.z = -20;
-		object.position.x = 10;
-		object.position.y = 10;
-		object.castShadow = true;
-		scene.add(object);    
-	}, function(andamento) {
-		console.log((andamento.loaded / andamento.total *100) + "% pronto!");
-	}, function (error) { console.log(error); });
-	fbxLoader.load('../assets/Sheep.fbx', function(object) {
-		sheep1 = object;
-		object.traverse(function(child) {
-			if (child instanceof THREE.Mesh) {
-				child.material.map = textureLoader.load("../assets/UVSheep.png");
-				child.material.shininess = 0;
-			}
-		});
-		object.scale.x = 0.01;
-		object.scale.y = 0.01;
-		object.scale.z = 0.01;
-		object.position.z = -30;
-		object.position.x = 5;
-		object.position.y = -2;
-		object.castShadow = true;
-		scene.add(object);    
-	}, function(andamento) {
-		console.log((andamento.loaded / andamento.total *100) + "% pronto!");
-	}, function (error) { console.log(error); });
 }
 
 var init = function() {
-	scene = new THREE.Scene();
-	scene.background = new THREE.Color(0xcce0ff);
-	camera = new THREE.PerspectiveCamera(40, window.innerWidth / window.innerHeight, 1, 140);
+
 	renderer = new THREE.WebGLRenderer();
 	renderer.setSize(window.innerWidth, window.innerHeight);
 	document.body.appendChild(renderer.domElement);
+
+	scene = new THREE.Scene();
+	scene.background = new THREE.Color(0x000000);
+
+	camera = new THREE.PerspectiveCamera(40, window.innerWidth / window.innerHeight, 1, 140);
+	camera.position.y = 5;
+	camera.rotation.order = 'YXZ';
 
 	loadObj();
 
@@ -219,17 +60,71 @@ var init = function() {
 	scene.add(new THREE.AmbientLight(0xffffff));
 
 	criaGround();
-	guiFunction();
 	render();
+	document.addEventListener('keydown', onKeyDown);
 };
 
 var render = function() {
 	requestAnimationFrame(render);
+	if (bounce > 1) {
+		bounceMult = -1;
+	} else if (bounce < 0) {
+		bounceMult = 1;
+	}
 	renderer.render(scene, camera);
 };
 
-window.onload = this.init;
 
-function toRadians(angle) {
-	return angle * (Math.PI / 180);
+var onKeyDown = function(e){
+    console.log(e.keyCode);
+    if(e.keyCode == 65){ // a
+			camera.translateX(-0.5);
+			if (bounceMult == 1) {
+				bounce += 0.1;
+			} else if (bounceMult == -1) {
+				bounce -= 0.1;
+			}
+			camera.position.y = 5 + bounce;
+    }
+    if(e.keyCode == 68){ // d
+			camera.translateX(0.5);
+			if (bounceMult == 1) {
+				bounce += 0.1;
+			} else if (bounceMult == -1) {
+				bounce -= 0.1;
+			}
+			camera.position.y = 5 + bounce;
+    }
+    if(e.keyCode == 87){ // w
+			camera.translateZ(-1);
+			if (bounceMult == 1) {
+				bounce += 0.1;
+			} else if (bounceMult == -1) {
+				bounce -= 0.1;
+			}
+			camera.position.y = 5 + bounce;
+    }
+    if(e.keyCode == 83){ // s
+			camera.translateZ(1);
+			if (bounceMult == 1) {
+				bounce += 0.1;
+			} else if (bounceMult == -1) {
+				bounce -= 0.1;
+			}
+			camera.position.y = 5 + bounce;
+    }
+    if(e.keyCode == 38){ // up
+			camera.rotation.x+=0.02;
+    }
+    if(e.keyCode == 40){ // down
+			camera.rotation.x-=0.02;
+    }
+    if(e.keyCode == 37){ // left
+			camera.rotation.y+=0.04;
+    }
+    if(e.keyCode == 39){ // right
+			camera.rotation.y-=0.04;
+    }
 }
+
+window.onload = this.init;

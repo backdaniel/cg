@@ -16,6 +16,7 @@ https://backdaniel.github.io/cg
 
 [FINAL](FINAL) - uma cena utilizando todos os conceitos trabalhados em aula
 
+`chrome --allow-file-access-from-files`
 
 ## Os requisitos mínimos do trabalho são:
 
