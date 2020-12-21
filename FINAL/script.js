@@ -27,6 +27,46 @@ var loadObj = function() {
 	objLoader = new THREE.OBJLoader();
 	fbxLoader = new THREE.FBXLoader();
 	textureLoader = new THREE.TextureLoader();
+	for (var i = 0; i < 30; i++) {
+		objLoader.load('../assets/Skull.obj', function(object) {
+			object.traverse(function (child) {
+				if (child instanceof THREE.Mesh) {
+					child.material.color.setHex("0x"+Math.floor(Math.random()*16777215).toString(16));
+				}
+			});
+			object.scale.x = 1;
+			object.scale.y = 1;
+			object.scale.z = 1;
+			object.position.z = Math.floor(Math.random() * (600 - -600 + 1) + -600);
+			object.position.x = Math.floor(Math.random() * (600 - -600 + 1) + -600);
+			object.position.y = Math.floor(Math.random() * (60 - 0 + 1) + 0);
+			object.rotation.z += Math.floor(Math.random() * (360 - 0 + 1) + 0);
+			object.rotation.x += Math.floor(Math.random() * (360 - 0 + 1) + 0);
+			object.rotation.y += Math.floor(Math.random() * (360 - 0 + 1) + 0);
+			object.castShadow = true;
+			scene.add(object);    
+		}, function(andamento) {
+			console.log((andamento.loaded / andamento.total *100) + "% pronto!");
+		}, function (error) { console.log(error); });
+	}
+	fbxLoader.load('../assets/Earth.fbx', function(object) {
+		object.traverse(function(child) {
+			if (child instanceof THREE.Mesh) {
+				child.material.map = textureLoader.load("../assets/earth.jpg");
+				child.material.shininess = 0;
+			}
+		});
+		object.scale.x = 1;
+		object.scale.y = 1;
+		object.scale.z = 1;
+		object.position.z = 20;
+		object.position.x = 500;
+		object.position.y = 300;
+		object.castShadow = true;
+		scene.add(object);    
+	}, function(andamento) {
+		console.log((andamento.loaded / andamento.total *100) + "% pronto!");
+	}, function (error) { console.log(error); });
 }
 
 var init = function() {
@@ -38,7 +78,7 @@ var init = function() {
 	scene = new THREE.Scene();
 	scene.background = new THREE.Color(0x000000);
 
-	camera = new THREE.PerspectiveCamera(40, window.innerWidth / window.innerHeight, 1, 140);
+	camera = new THREE.PerspectiveCamera(40, window.innerWidth / window.innerHeight, 1, 1000);
 	camera.position.y = 5;
 	camera.rotation.order = 'YXZ';
 
